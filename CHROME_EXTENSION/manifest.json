@@ -1,0 +1,15 @@
+{
+    "manifest_version" : 2,
+    "name" : "MF Chrome Extension",
+    "version" : "1.0",
+    "description" : "This is a My First Chrome Extensio",
+    "icons" : {
+        "128" : "mficon_128.png",
+        "48" : "mficon_48.png",
+        "16" : "mficon_16.png"
+    },
+    "browser_action" : {
+        "default_icon" : "mficon_16.png",
+        "default_popup" : "popup.html"
+    }
+}
