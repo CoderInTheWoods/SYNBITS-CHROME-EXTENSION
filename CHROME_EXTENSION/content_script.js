@@ -4,7 +4,7 @@ var myJson = "";
 const userAction = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
 
-   myJson = await response.json(); //extract JSON from the http response
+  myJson = await response.json(); //extract JSON from the http response
   // do something with myJson
 };
 
@@ -17,22 +17,34 @@ userAction();
 //     "completed": false
 //   }
 
-
-
 $(":input").on("focus", function () {
   // when input field is in focus
 
   $(":input").keyup(function (e) {
-    if ((e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode == 191) {
-      val = val + e.key;
-      if (val.charAt(val.length - 1) == "/") {
+
+    // if (e.keyCode == 8) {
+    //   // If Backspace is pressed once, clear the 'val' variable by one character.
+    //   val = val.slice(0, -1);
+    // }
+    val = this.value;
+
+    console.log(
+        Object.keys(myJson).filter(function (item) {
+          return item.startsWith(val);
+        })
+      );
+
+    if (e.keyCode == 191) {
+
+    // console.log(this.value);
+
+    //   if (val.charAt(val.length - 1) == "/") {
         console.log("value= ", val);
-        var res = myJson[val.slice(0,-1)];
+        var res = myJson[val.slice(0, -1)];
         val = "";
-        this.value = res; 
-      }
+        this.value = res;
+    //   }
     }
-   
   });
 });
 
