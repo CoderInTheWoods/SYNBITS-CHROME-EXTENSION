@@ -34,6 +34,7 @@ $(document).ready(function() {
         });
     });
 
+    console.log("test line");
 
     $(document).on("click keyup", function() {
         if (isInput == false) {
