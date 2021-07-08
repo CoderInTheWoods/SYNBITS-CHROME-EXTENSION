@@ -1,6 +1,6 @@
 var val = ""; // input value that user is entering currently
 $(document).ready(function() {
-    var tags = [{ "key": "nm/", "value": "Patel Jaynil SunilKumar" }, { "key": "n/", "value": "Jaynil" }, { "key": "em/", "value": "Jainil@gmail.com" }];
+  var tags = [{ "key": "nm/", "value": "Patel Jaynil SunilKumar" }, { "key": "n/", "value": "Jaynil" }, { "key": "em/", "value": "Jainil@gmail.com" }];
 
     console.log("ready!");
     var isInput = false;

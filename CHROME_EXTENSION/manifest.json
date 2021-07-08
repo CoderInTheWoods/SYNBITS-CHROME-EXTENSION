@@ -6,11 +6,16 @@
     "permissions": [
         "activeTab",
         "<all_urls>",
-        "tabs"
+        "tabs",
+        "storage"
     ],
     "icons": {
         "128": "icon_128.png",
         "48": "icon_48.png"
+    },
+    "background":{
+        "scripts":["background_script.js"],
+        "persistent":true
     },
     "browser_action": {
         "default_icon": "icon_48.png"
