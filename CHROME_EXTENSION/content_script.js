@@ -1,56 +1,79 @@
 var val = ""; // input value that user is entering currently
-var myJson = "";
+$(document).ready(function() {
+    var tags = [{ "key": "nm/", "value": "Patel Jaynil SunilKumar" }, { "key": "n/", "value": "Jaynil" }, { "key": "em/", "value": "Jainil@gmail.com" }];
 
-const userAction = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    console.log("ready!");
+    var isInput = false;
+    $(":input").on("focus", function() {
+        isInput = true;
+        console.log("input focus", this);
+        var inputRef = this;
 
-  myJson = await response.json(); //extract JSON from the http response
-  // do something with myJson
-};
+        $(inputRef).autocomplete({
+            source: function(request, response) {
+                response($.map(tags, function(value, key) {
+                    var shortcut = value.key.toUpperCase();
+                    $(inputRef).keyup(function() {
+                        console.log("value issss = ", inputRef.value);
+                        if (inputRef.value == value.key) {
+                            inputRef.value = value.value;
+                            console.log("value current   = ", inputRef.value, value.value);
+                        }
+                    });
 
-userAction();
+                    if ((shortcut.indexOf(request.term.toUpperCase()) != -1)) {
+                        return {
+                            label: value.key + " " + value.value,
+                            value: value.value
+                        }
+                    } else {
+                        return null;
+                    }
+                }));
+            }
+        });
+    });
 
-// {
-//     "userId": 1,
-//     "id": 1,
-//     "title": "delectus aut autem",
-//     "completed": false
-//   }
 
-$(":input").on("focus", function () {
-  // when input field is in focus
+    $(document).on("click keyup", function() {
+        if (isInput == false) {
+            var inputRef = document.activeElement;
+            console.log("document.activeElement = ", inputRef);
 
-  $(":input").keyup(function (e) {
+            $(inputRef).autocomplete({
+                source: function(request, response) {
+                    response($.map(tags, function(value, key) {
+                        var shortcut = value.key.toUpperCase();
+                        $(inputRef).keyup(function() {
+                            console.log("value issss = ", inputRef.value);
+                            if (inputRef.value == value.key) {
+                                inputRef.value = value.value;
+                                console.log("value current   = ", inputRef.value, value.value);
+                            }
+                        });
+                        if ((shortcut.indexOf(request.term.toUpperCase()) != -1)) {
+                            return {
+                                label: value.key,
+                                value: value.value
+                            }
+                        } else {
+                            return null;
+                        }
+                    }));
+                }
+            });
+        }
+    });
 
-    // if (e.keyCode == 8) {
-    //   // If Backspace is pressed once, clear the 'val' variable by one character.
-    //   val = val.slice(0, -1);
-    // }
-    val = this.value;
-
-    console.log(
-        Object.keys(myJson).filter(function (item) {
-          return item.startsWith(val);
-        })
-      );
-
-    if (e.keyCode == 191) {
-
-    // console.log(this.value);
-
-    //   if (val.charAt(val.length - 1) == "/") {
-        console.log("value= ", val);
-        var res = myJson[val.slice(0, -1)];
-        val = "";
-        this.value = res;
-    //   }
-    }
-  });
 });
 
 // PREVIOUSLY WORKING BASE CODE
 
-// var val = ""; // input value that user is entering currently
+
+// $(":input").on("blur", function() {
+//     val = "";
+// });
+
 
 // $(":input").on("focus", function () { //when input field is in focus
 
